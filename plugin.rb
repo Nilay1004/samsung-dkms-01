@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# name: samsung-dkms
+# name: samsung-dkms-01
 # about: This plugin encrypt all the emails present in discouse DB and discourse logs.
 # meta_topic_id: 001
 # version: 0.0.1
@@ -20,6 +20,15 @@ end
 require_relative "lib/pii_encryption"
 
 after_initialize do
+
+  module ::SamsungDkms
+    PLUGIN_NAME ||= "samsung-dkms-01"
+
+    class Engine < ::Rails::Engine
+      engine_name PLUGIN_NAME
+      isolate_namespace SamsungDkms
+    end
+  end
 
   require_relative 'lib/extensions/emaillog_extension'
   require_relative 'lib/extensions/emailtoken_extension'
