@@ -8,3 +8,4 @@ module SamsungDkms::UserPatch
       PIIEncryption.decrypt_email(encrypted_email)
     end
   end
+end
