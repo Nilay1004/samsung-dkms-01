@@ -2,8 +2,9 @@
 
 # This extension modifies the EmailLog class to encrypt the to_address field of email_logs table before saving it to the database and decrypt it upon retrieval. This ensures that email addresses are stored encrypted.
 
-class ::EmailLog
-  
+
+
+module SamsungDkms::EmailLogPatch
   before_save :encrypt_to_address
   after_initialize :decrypt_to_address
 
