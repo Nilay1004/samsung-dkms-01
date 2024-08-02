@@ -5,6 +5,7 @@
 require_dependency 'invite'
 
 module SamsungDkms::InvitePatch
+  extend ActiveSupport::Concern
 
   included do
     before_save :encrypt_email
