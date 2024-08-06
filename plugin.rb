@@ -38,7 +38,7 @@ after_initialize do
   require_relative "lib/samsung_dkms/emailtoken_patch"
   require_relative "lib/samsung_dkms/invite_patch"
   require_relative "lib/samsung_dkms/sessioncontroller_patch"
-  require_relative "lib/samsung_dkms/useremail_patch"
+  require_relative "lib/samsung_dkms/emailvalidator_patch"
 
   reloadable_patch do |plugin|
     User.prepend(SamsungDkms::UserPatch)
