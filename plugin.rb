@@ -30,8 +30,6 @@ after_initialize do
     end
   end
 
-  require_relative 'lib/extensions/emailvalidator_extension'
-  require_relative 'lib/extensions/sessioncontroller_extension'
   require_relative 'lib/extensions/useremail_extension'
 
   require_relative "lib/samsung_dkms/user_patch"
@@ -39,12 +37,16 @@ after_initialize do
   require_relative "lib/samsung_dkms/skippedemaillog_patch"
   require_relative "lib/samsung_dkms/emailtoken_patch"
   require_relative "lib/samsung_dkms/invite_patch"
+  require_relative "lib/samsung_dkms/sessioncontroller_patch"
+  require_relative "lib/samsung_dkms/useremail_patch"
 
   reloadable_patch do |plugin|
     User.prepend(SamsungDkms::UserPatch)
     EmailLog.prepend(SamsungDkms::EmailLogPatch)
     SkippedEmailLog.prepend(SamsungDkms::SkippedEmailLogPatch)
     EmailToken.prepend(SamsungDkms::EmailTokenPatch)
+    EmailValidator.prepend(SamsungDkms::EmailValidatorPatch)
+    SessionController.prepend(SamsungDkms::SessionControllerPatch)
     Invite.prepend(SamsungDkms::InvitePatch)
   end
 end
