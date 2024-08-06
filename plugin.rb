@@ -43,7 +43,7 @@ after_initialize do
   reloadable_patch do |plugin|
     User.prepend(SamsungDkms::UserPatch)
     EmailLog.prepend(SamsungDkms::EmailLogPatch)
-    SkippedEmailLog(SamsungDkms::SkippedEmailLogPatch)
+    SkippedEmailLog.prepend(SamsungDkms::SkippedEmailLogPatch)
     Invite.prepend(SamsungDkms::InvitePatch)
   end
 end
