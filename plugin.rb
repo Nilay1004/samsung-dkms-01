@@ -30,10 +30,10 @@ after_initialize do
     end
   end
 
-  require_relative 'lib/extensions/emaillog_extension'
-  require_relative 'lib/extensions/emailtoken_extension'
-  require_relative 'lib/extensions/skippedemaillog_extension'
-  require_relative 'lib/extensions/user_extension'
+  require_relative 'lib/extensions/invite_extension'
+  require_relative 'lib/extensions/sessioncontroller_extension'
+  require_relative 'lib/extensions/emailvalidator_extension'
+  require_relative 'lib/extensions/useremail_extension'
 
   require_relative "lib/samsung_dkms/user_patch"
   require_relative "lib/samsung_dkms/emaillog_patch"
