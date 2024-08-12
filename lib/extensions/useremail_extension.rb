@@ -7,17 +7,14 @@
 
 require_dependency 'user_email'
 
-module SamsungDkms::UserEmailPatch
-  extend ActiveSupport::Concern
+class ::UserEmail
+  
+  before_validation :set_temporary_email_for_validation, if: :email_changed?
+  after_validation :restore_encrypted_email, if: :email_changed?
 
-  included do
-    before_validation :set_temporary_email_for_validation, if: :email_changed?
-    after_validation :restore_encrypted_email, if: :email_changed?
-
-    before_save :encrypt_email_address, if: :email_changed?
-    before_save :encrypt_normalized_email
-    after_find :decrypt_normalized_email
-  end
+  before_save :encrypt_email_address, if: :email_changed?
+  before_save :encrypt_normalized_email
+  after_find :decrypt_normalized_email
 
   def email
     @decrypted_email ||= PIIEncryption.decrypt_email(read_attribute(:email))
@@ -64,5 +61,4 @@ module SamsungDkms::UserEmailPatch
       self.normalized_email = PIIEncryption.decrypt_email(self.normalized_email)
     end
   end
-  
 end

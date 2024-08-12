@@ -4,7 +4,9 @@
 
 require_dependency 'session_controller'
 
-module SamsungDkms::SessionControllerPatch
+class ::SessionController
+  
+  alias_method :original_create, :create
 
   def create
     if params[:login].present?

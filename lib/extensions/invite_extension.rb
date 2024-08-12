@@ -4,21 +4,15 @@
 
 require_dependency 'invite'
 
-module SamsungDkms::InvitePatch
-  extend ActiveSupport::Concern
-
-  included do
-    before_save :encrypt_email
+class ::Invite
+  
+  before_save do
+    self.email = PIIEncryption.encrypt_email(self.email)
   end
-
+  
   def email
     decrypted_email = PIIEncryption.decrypt_email(read_attribute(:email))
+    
     decrypted_email
-  end
-
-  private
-
-  def encrypt_email
-    self.email = PIIEncryption.encrypt_email(self.email)
   end
 end
